@@ -56,44 +56,9 @@ router.get("/search", wrapAsync(async (req, res) => {
 
     res.render("./listing/index.ejs", { alllist: listings,count,count2,count3 });
 }));
-class WebsiteHitTracker {
-    constructor() {
-        this.customerDevices = new Map(); // Maps customerId to a Set of deviceIds
-        this.websiteVisits = new Map(); // Maps websiteId to a Map of customerId to a Set of deviceIds
-    }
 
-    visitWebsite(customerId, deviceId, websiteId) {
-        if (!this.customerDevices.has(customerId)) {
-            this.customerDevices.set(customerId, new Set());
-        }
-        this.customerDevices.get(customerId).add(deviceId);
 
-        if (!this.websiteVisits.has(websiteId)) {
-            this.websiteVisits.set(websiteId, new Map());
-        }
-        if (!this.websiteVisits.get(websiteId).has(customerId)) {
-            this.websiteVisits.get(websiteId).set(customerId, new Set());
-        }
-        this.websiteVisits.get(websiteId).get(customerId).add(deviceId);
-    }
-
-    getWebsiteVisitCountForCustomer(customerId, websiteId) {
-        if (this.websiteVisits.has(websiteId) && this.websiteVisits.get(websiteId).has(customerId)) {
-            return this.websiteVisits.get(websiteId).get(customerId).size;
-        }
-        return 0;
-    }
-
-    getOverallWebsiteHitCount(websiteId) {
-        if (this.websiteVisits.has(websiteId)) {
-            
-            return this.websiteVisits.get(websiteId).size;
-        }
-        return 0;
-    }
-}
-
-const tracker = new WebsiteHitTracker();
+const tracker = require("../utils/HitTracker.js");
 //add new route
 router.get("/new",isloggedin,(req,res,next)=>{
     res.render("./listing/add.ejs");
