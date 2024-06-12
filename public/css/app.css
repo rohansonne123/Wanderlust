@@ -1,0 +1,116 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh !important;
+}
+.container{
+    flex:1;
+}
+.navbar{
+    background-color: white;
+    height: 5rem;
+}
+.nav-link{
+    color: #222222 !important;
+}
+.fa-compass{
+   font-size: 2rem;
+    color: #fe424d;
+}
+
+/* card css */
+.card-listing{
+    border: none !important;
+    margin-top: 2rem !important;
+    
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    object-fit: cover !important;
+    
+}
+.card-body{
+    padding: 0 !important;
+}
+.li-link{
+    text-decoration: none !important;
+}
+.card-text{
+    color: #222222;
+    margin-top: 0 !important;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* footer */
+.f-info{
+    height: 8rem;
+    background-color: azure;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+.ft-info-social ,.ft-info-link{
+    width: 100% !important;
+}
+.ft-info-social ,.ft-info-link,.ft-name{
+    color: #222222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ft-info-link a{
+    text-decoration: none ;
+    color: #222222;
+    margin-left: 1rem;
+    
+}
+.ft-info-social i{
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+/* buttons */
+.btn-add{
+    border: none !important;
+    background-color:#fe424d !important;
+}
+.btn-edit{
+    border: none !important;
+    background-color:#fe424d !important;
+}
+
+/* show page */
+.show-img{
+    height: 15rem;
+}
+.btns{
+    display: flex;
+}
+.show-card{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#map{
+    height: 400px;
+    width: 100vh;
+}
+
+.carousel-inner{
+    object-fit: cover !important;
+    height: 300px !important;
+    border-radius: 1rem !important;
+    
+}
+@media (max-width: 768px) {
+    #map{
+        width: 400px !important;
+    }
+}

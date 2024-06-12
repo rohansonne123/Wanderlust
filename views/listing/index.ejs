@@ -1,0 +1,194 @@
+<% layout("./layout/boilerplate.ejs")%>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+<body>
+    <style>
+       /* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#filters {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center;
+    gap: 1rem; /* Space between filters */
+}
+
+.filter, #filters a {
+    text-align: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter i {
+    font-size: 1.5rem;
+    
+}
+
+#filters a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Responsive Styles */
+
+/* Small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+    #filters {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Three filters per row */
+        gap: 1rem; /* Space between grid items */
+    }
+
+    .filter, #filters a {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+        padding: 1rem; /* Add padding for better touch targets */
+    }
+
+    .row-cols-lg-3 .card,
+    .row-cols-md-2 .card,
+    .row-cols-sm-1 .card {
+        width: 90%;
+        margin: 0.5rem auto; /* Center cards on mobile */
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+    #filters {
+        justify-content: space-around; /* Spread filters evenly */
+        display: flex; /* Use flex for tablets and above */
+    }
+
+    .filter, #filters a {
+        font-size: 1.2rem;
+        margin: 0.5rem 1rem;
+    }
+
+    .row-cols-lg-3 .card,
+    .row-cols-md-2 .card,
+    .row-cols-sm-1 .card {
+        width: 45%;
+        margin: 1rem; /* Space between cards */
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #filters {
+        justify-content: space-between; /* Spread filters to the edges */
+        display: flex; /* Use flex for desktops and above */
+    }
+
+    .filter, #filters a {
+        font-size: 1.5rem;
+        margin: 0.5rem 2rem;
+    }
+
+    .row-cols-lg-3 .card,
+    .row-cols-md-2 .card,
+    .row-cols-sm-1 .card {
+        width: 30%;
+        margin: 1rem; /* Space between cards */
+    }
+}
+
+    </style>
+    <div  id="filters" class="f-div mt-3">
+        <div class="filter">
+            <div ><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Fort</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-tractor"></i></div>
+            <p>Castels</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-hotel"></i></div>
+            <p>Hotels</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class="filter">
+        <button type="button" class="btn btn-primary">
+            Total Visitors <span class="badge bg-secondary"><%=count2%></span>
+          </button>
+        </div>
+        <div class="filter">
+            <button type="button" class="btn btn-primary">
+                Registered User <span class="badge bg-secondary"><%=count3%></span>
+              </button>
+        </div>
+        <div class="filter">
+            <button type="button" class="btn btn-primary">
+                uniqueUser <span class="badge bg-secondary"><%=count%></span>
+              </button>
+        </div>
+
+
+        <div class="switch-info">
+            <div class="form-check  form-switch">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display Total Before Taxes</label>
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            </div>
+        </div>
+    </div>
+    
+    <ul>
+        
+        <div class="row row-cols-md-2 row-cols-lg-4 row-cols-sm-1">
+            
+            <% for(let li of alllist){ %>
+            <a class="li-link" href="/listing/<%=li._id%>">
+                <div class="card col card-listing" style="width: 15rem">
+                    <img src="<%=li.image[0].path%>" class="card-img-top" style="height: 15rem" alt="...">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                    <p class="card-text">
+                        <b><%=li.title%></b> <br>
+                        &#8377;<%=li.price %>
+                        <i class="hidden">&nbsp; + 18% GST</i>
+                    </p>
+                    
+                    </div>
+                </div>
+            </a>
+            <% } %>
+        </div>
+            
+       
+    </ul>
+    
+</body>
+<script>
+    let tax=document.getElementById("flexSwitchCheckDefault");
+    tax.addEventListener("click",()=>{
+        let taxInfo=document.getElementsByClassName("hidden");
+        for(let info of taxInfo){
+            if(info.style.display!="inline"){
+                info.style.display="inline";
+            }else{
+                info.style.display="none";
+            }
+        }
+    })
+</script>
